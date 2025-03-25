@@ -1,0 +1,3 @@
+TKinter
+Pillow
+ttf-mscorefonts-installer
