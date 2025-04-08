@@ -1,0 +1,29 @@
+{% block content %}
+{% include 'header.html' %}
+{% from 'bootstrap5/form.html' import render_form %}
+<div class="col-md-3 text-end">
+    <button type="button" class="btn btn-outline-primary me-2">Login</button>
+    <button type="button" class="btn btn-primary">Sign-up</button>
+</div>
+</header>
+</div>
+<div class="container-form">
+    <h1>Sign up</h1><br>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="alert alert-danger">
+            {% for message in messages %}
+                {{ message }}<br>
+            {% endfor %}
+        </div>
+    {% endif %}
+    {% endwith %}
+    
+    <form action="/" method="POST">
+        {{ form.hidden_tag() }}  <!-- This includes the CSRF token -->
+        {{ render_form(form, novalidate=True) }}  <!-- Render the form fields -->
+        <p>Already have an account? <a href="{{ url_for('signin') }}">Login</a></p>
+    </form>
+</div>
+{% include 'footer.html' %}
+{% endblock %}

@@ -1,0 +1,16 @@
+flask
+Flask-SQLAlchemy
+Flask-WTF
+Flask-Login
+Flask-Migrate
+Flask-Mail
+Bootstrap-Flask
+Flask-Bootstrap
+Flask-bootstrap5
+Flask-CKEditor==1.0.0
+gunicorn
+Flask-Admin
+python-dotenv
+dotenv
+werkzeug
+email-validator

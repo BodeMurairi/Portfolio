@@ -1,0 +1,38 @@
+.container{
+    width: 80%;
+    margin: 0 auto;
+}
+
+.alert.alert-danger{
+    color: red;
+}
+
+.alert.alert-success{
+    color: green;
+}
+
+/* Ensure the parent element is a flex container */
+.cards-tasks {
+    display: flex; 
+    flex-direction: row;
+    gap: 30px;
+    justify-content: space-between; 
+    flex-wrap: wrap; 
+}
+
+.card {
+    padding: 40px;
+    width: 250px;
+    background-color: #f0f0f0; /* Optional: Set a background color for cards */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for card effect */
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+h2 {
+    text-align: center;
+    color: #666;
+}
