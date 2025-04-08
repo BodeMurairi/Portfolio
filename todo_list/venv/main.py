@@ -2,9 +2,15 @@
 # -*- coding: utf-8 -*-
 
 import os
-from flask import Flask, render_template, request, redirect, url_for
+import time
+from flask import Flask, render_template, request, redirect, url_for, flash
+from flask_wtf.csrf import CSRFProtect
+from flask_wtf import FlaskForm
+from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
+from forms import TaskForm, RegistrationForm
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
@@ -21,6 +27,9 @@ secret_key = os.urandom(24)
 app.config['SECRET_KEY'] = secret_key
 app.config['SQLALCHEMY_DATABASE_URI'] = db_url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+Bootstrap(app)
+csrf = CSRFProtect(app)
 
 # Initialize Flask-SQLAlchemy
 db = SQLAlchemy(app)
@@ -59,10 +68,53 @@ with app.app_context():
 # Flask routes
 @app.route('/', methods=['GET', 'POST'])
 def signup():
+    if request.method == "POST":
+        username = request.form["username"]
+        email = request.form["email"]
+        password = request.form["password"]
+        confirm_password = request.form["confirm_password"]
+        
+        if password == confirm_password:
+            hashed_password = generate_password_hash(password, method='pbkdf2:sha256', salt_length=16)
+            # Check if the username or email already exists
+            existing_user = User.query.filter((User.username == username) | (User.email == email)).first()
+            if existing_user:
+                flash('Username or email already exists!', 'danger')
+                return redirect(url_for('signup'))
+            # Create new user
+            new_user = User(username=username, email=email, password=hashed_password)
+            db.session.add(new_user)
+            db.session.commit()
+            flash('User created successfully!', 'success')
+            time.sleep(2)
+            return redirect(url_for('signin'))
+        else:
+            flash('Passwords do not match!', 'danger')
+            time.sleep(2)
+            # Redirect to the signup page
+            return redirect(url_for('signup'))
+
     return render_template('signup.html')
 
-@app.route('/login', methods=['GET', 'POST'])
+
+@app.route('/signin', methods=['GET', 'POST'])
 def signin():
+    if request.method == "POST":
+        username = request.form["username"]
+        email =  request.form["email"]
+        password = request.form["password"]
+        # Check if the user exists
+        user = User.query.filter((User.username == username) | (User.email == email)).first()
+        if user and check_password_hash(user.password, password):
+            # User authenticated successfully
+            flash('Login successful!', 'success')
+            return redirect(url_for('dashboard'))
+        else:
+            # Invalid credentials
+            flash('Invalid username/email or password!', 'danger')
+            time.sleep(2)
+            return redirect(url_for('signin'))
+
     return render_template('signin.html')
 
 @app.route('/dashboard')

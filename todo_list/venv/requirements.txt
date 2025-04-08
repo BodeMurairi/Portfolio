@@ -8,3 +8,4 @@ Flask-bootstrap
 Flask-Admin
 python-dotenv
 dotenv
+werkzeug
