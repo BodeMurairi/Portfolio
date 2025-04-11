@@ -13,18 +13,17 @@
 
 /* Ensure the parent element is a flex container */
 .cards-tasks {
-    display: flex; 
-    flex-direction: row;
-    gap: 30px;
-    justify-content: space-between; 
-    flex-wrap: wrap; 
+    display: flex;
+    flex-wrap: wrap; /* Allows cards to wrap to the next line if needed */
+    gap: 30px; /* Space between cards */
+    justify-content: space-between; /* Distributes space between the cards */
 }
 
 .card {
-    padding: 40px;
-    width: 250px;
-    background-color: #f0f0f0; /* Optional: Set a background color for cards */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for card effect */
+    flex: 1 1 calc(33.333% - 30px); /* Adjust the width of the cards */
+    max-width: calc(33.333% - 30px); /* Ensures cards don't grow beyond this width */
+    box-sizing: border-box; /* Includes padding and border in the element's total width and height */
+    /* Additional styling for the cards */
 }
 
 h1 {

@@ -34,23 +34,24 @@
         </div>
       </header>      
       </div>
-      {% for task in tasks %}
-    <div class="card-tasks">
-        <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">{{ task.title }}</h5>
-              <p class="card-text">{{ task.description }}</p>
+      <div class="cards-tasks">
+        {% for task in tasks %}
+          <div class="card" style="width: 18rem;">
+              <img src="..." class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">{{ task.title }}</h5>
+                <p class="card-text">{{ task.description }}</p>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">{{ task.completed }}</li>
+              </ul>
+              <div class="card-body">
+                <a href="#" class="card-link">Edit</a>
+                <a href="{{url_for('delete', task_id = task.id)}}" class="card-link">Delete</a>
+              </div>
             </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">{{ task.completed }}</li>
-            </ul>
-            <div class="card-body">
-              <a href="#" class="card-link">Edit</a>
-              <a href="{{url_for('delete', task_id = task.id)}}" class="card-link">Delete</a>
-            </div>
-          </div>
-    </div>
-      {% endfor %}
+        {% endfor %}
+      </div>
+      
 </body>
 </html>
