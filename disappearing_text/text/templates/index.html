@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disappearing Text</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<body>
+    <div class="container-form">
+        <h1> Disappearing Text </h1>
+        <form method="POST" action="{{ url_for('index') }}">
+            <textarea name="content" rows="30" cols="200">{{content}}</textarea><br>
+            <input type="submit" value="Disappearing Text">
+        </form>
+    </div>
+    <!-- Display messages -->
+    <h2>Active Messages</h2>
+    <ul>
+        {% for message in messages %}
+            <li>{{ message.text }} (expires at: {{ message.expires_at }})</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
