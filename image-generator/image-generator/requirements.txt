@@ -8,7 +8,10 @@ WTForms
 Werkzeug
 Flask
 flask_sqlalchemy
+flask-reuploaded
 SQLAlchemy
 gunicorn
 psycopg2-binary
 numpy
+Pillow
+webcolors
