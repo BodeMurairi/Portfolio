@@ -15,3 +15,5 @@ psycopg2-binary
 numpy
 Pillow
 webcolors
+matplotlib
+scikit-learn

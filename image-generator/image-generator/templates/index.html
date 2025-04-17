@@ -50,22 +50,25 @@
           {% endif %}
         </div>
         <div class="col-auto">
-          {% if colors_info %}
+
             <h4 class="text-center">Top colours used</h4>
+            {% if results %}
             <ul class="list-group">
-              {% for color in colors_info %}
-                <li class="list-group-item">
-                  <div class="d-flex justify-content-between">
-                    <span>Color-name: {{ color.name }} -- RGB: {{ color.rgb }}</span>
-                    <!-- Display the color box with RGB value as background -->
-                    <span style="background-color: rgb{{ color.rgb }}; width: 50px; height: 20px; border-radius: 5px;"></span>
-                  </div>
-                </li>
+              {% for color in results %}
+              <li class="list-group-item">
+                <div class="d-flex justify-content-between align-items-center">
+                  <span 
+                    style="background-color: rgb{{ color.rgb }}; padding: 5px 10px; border-radius: 5px; color: white;">
+                    {{ color.name }} -- RGB: {{ color.rgb }}
+                  </span>
+                </div>
+              </li>
               {% endfor %}
+              
             </ul>
-          {% else %}
-            <p class="text-center">No colors found. Please upload an image first.</p>
-          {% endif %}
+            {% else %}
+            <p class="text-center">No colours generated yet.</p>
+            {% endif %}
         </div>
       </div>
     </div>
