@@ -9,17 +9,20 @@ This project is focused on developing a Python application that adds watermarks 
 - Save the watermarked image in the desired format
 
 ## Installation
-To install the necessary dependencies, run:
-```bash
-for ttf-mscorefonts-installer, if using linux distribution, 
-run sudo apt-get install ttf-mscorefonts-installer
-run sudo apt install python3-pil
-
+To install the necessary dependencies, 
+activate virtual environment:
+run:
+```
+source project_venv/bin/activate on linux
+cd project_venv/
+pip install pillow
+sudo apt install python3-pil.imagetk
+sudo apt-get install ttf-mscorefonts-installer
 ```
 
 ## Usage
 1. Clone the repository:
-    ```bash
+    bash
     git clone https://github.com/BodeMurairi/python_professional_portfolio.git
     ```
 2. Navigate to the project directory:
